@@ -23,6 +23,11 @@ export function exibirTexto(texto: string): void {
     console.log(chalk.bgHex(_bgHex).hex(_col)(texto));
 }
 
+/**
+ * Exibe o texto da postagem, quebrando-o para caber na janela.
+ * @param texto O texto da postagem.
+ * @param color A cor do texto (opcional, padrão é "#FFFFFF").
+ */
 export function exibirTextoPostagem(texto: string, color: string = "#FFFFFF"): void {
     let _tamanho = obterLarguraTerminal() - 4;
     for (let i = 0; i < texto.length; i += _tamanho) {

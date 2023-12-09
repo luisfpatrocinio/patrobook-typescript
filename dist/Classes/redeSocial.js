@@ -2,12 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedeSocial = void 0;
 const postagem_1 = require("./postagem");
-const perfisRep_1 = require("./perfisRep");
-const postagensRep_1 = require("./postagensRep");
 class RedeSocial {
-    constructor() {
-        this._repPostagens = new postagensRep_1.RepositorioDePostagens;
-        this._repPerfis = new perfisRep_1.RepositorioDePerfis;
+    constructor(repPerfis, repPostagens) {
+        this._repPerfis = repPerfis;
+        this._repPostagens = repPostagens;
     }
     incluirPerfil(perfil) {
         try {

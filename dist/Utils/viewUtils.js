@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saltarLinhas = exports.feedView = exports.prepararTelaPostagem = exports.cabecalhoPrincipal = exports.showBlogLogo = exports.exibirTextoCentroCentro = exports.mainBackground = exports.exibirTextoEsquerda = exports.exibirTextoNoCentro = exports.limparTerminal = exports.obterAlturaTerminal = exports.obterLarguraTerminal = exports.obterCorDoFundo = exports.textCol = void 0;
+exports.showError = exports.saltarLinhas = exports.feedView = exports.prepararTelaPostagem = exports.cabecalhoPrincipal = exports.showBlogLogo = exports.exibirTextoCentroCentro = exports.mainBackground = exports.exibirTextoEsquerda = exports.exibirTextoNoCentro = exports.limparTerminal = exports.obterAlturaTerminal = exports.obterLarguraTerminal = exports.obterCorDoFundo = exports.textCol = void 0;
 var readline = require('readline');
 const chalk = require('chalk');
 const BG_COLOR = '#1e1d39';
 const BG_COLOR2 = '#402751';
 const SEL_COLOR = '#a4dddb';
+const ioUtils_1 = require("./ioUtils");
 function textCol(texto, color = "#FFFFFF", bgColor = "000000") {
     if (bgColor === undefined) {
         bgColor = obterCorDoFundo();
@@ -143,6 +144,13 @@ function saltarLinhas(quantidade) {
     }
 }
 exports.saltarLinhas = saltarLinhas;
+function showError(_e) {
+    (0, ioUtils_1.exibirTextoCentralizado)("--- ERRO ---");
+    (0, ioUtils_1.exibirTextoCentralizado)(_e.message);
+    (0, ioUtils_1.exibirTextoCentralizado)("-");
+    (0, ioUtils_1.enterToContinue)();
+}
+exports.showError = showError;
 // @TODO: Rodapé com informações:
 // Quantidade de perfis criados
 // Quantidade de postagens criadas

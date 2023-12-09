@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.App = void 0;
 // Importar bibliotecas principais:
 const perfil_1 = require("./Classes/perfil");
 const postagem_1 = require("./Classes/postagem");
@@ -11,9 +12,12 @@ const viewUtils_1 = require("./Utils/viewUtils");
 const generalUtils_1 = require("./Utils/generalUtils");
 // Leitura e Gravação de Arquivos
 const fs_1 = require("fs");
+// Exceções
 const profileExceptions_1 = require("./Exceptions/profileExceptions");
 const userError_1 = require("./Exceptions/userError");
 const postExceptions_1 = require("./Exceptions/postExceptions");
+const perfilRep_1 = require("./Repositories/perfilRep");
+const postsRep_1 = require("./Repositories/postsRep");
 // Visual
 const chalk = require('chalk');
 class App {
@@ -21,7 +25,13 @@ class App {
         // Atributos necessários para gerenciar os IDs dos perfis e postagens.
         this._qntPerfisCriados = 0;
         this._qntPostagensCriadas = 0;
+        /**
+         * Array de Postagens Favoritas
+         */
         this._postagensFavoritas = [];
+        /**
+         * Possíveis opções que o App exibirá no Menu Principal.
+         */
         this.menuOpcoes = [
             // Nome da opção, função a ser executada, condição para habilitar a opção
             new option_1.Option("Criar Perfil", this.criarPerfil, () => true),
@@ -37,8 +47,13 @@ class App {
             new option_1.Option("Exibir Postagens Favoritas", this.exibirPostagensFavoritas, () => this._postagensFavoritas.length > 0),
             new option_1.Option("Exibir Hashtags Populares", this.exibirHashtagsPopulares, () => this._redeSocial.obterPostagens().length > 0)
         ];
+        /**
+         * Cursor da opção selecionada no momento.
+         */
         this._opcaoSelecionada = 0;
-        this._redeSocial = new redeSocial_1.RedeSocial;
+        let repPerfis = new perfilRep_1.RepositorioDePerfis;
+        let repPostagens = new postsRep_1.RepositorioDePostagens;
+        this._redeSocial = new redeSocial_1.RedeSocial(repPerfis, repPostagens);
         try {
             // Carregar Arquivos caso hajam.
             this.carregarPerfis();
@@ -787,8 +802,4 @@ class App {
         (0, ioUtils_1.exibirTextoCentralizado)("=== FIM ===");
     }
 }
-function main() {
-    const app = new App();
-    app.executar();
-}
-main();
+exports.App = App;

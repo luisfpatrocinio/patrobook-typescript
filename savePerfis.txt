@@ -1,2 +1,10 @@
-perfisCriados:1
+perfisCriados:9
 1|Patrocinio|patrocinioluisf@gmail.com
+2|Ryan Faustino|ryofac@gmail.com
+3|Testando|teste@gmail.com
+4|Perfil|perfil@hotmail.com
+5|Elias|elias@aa.a
+6|Lalala|lala@lala.com
+7|Teste legal|lala@oioi.com
+8|lala|aaaa@aaaaa.aa
+9|Testandooo|lalalppo@aa.aa

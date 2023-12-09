@@ -11,23 +11,33 @@ import { extrairHashtags } from './Utils/generalUtils';
 
 // Leitura e Gravação de Arquivos
 import { readFileSync, writeFileSync } from 'fs';
+
+// Exceções
 import { EmailAlreadyExistsError, ProfileAlreadyExistsError, ProfileNotFoundError } from './Exceptions/profileExceptions';
 import { UserCancelError } from './Exceptions/userError';
-import { AppError } from './Exceptions/appError';
 import { PostNotFoundError } from './Exceptions/postExceptions';
+import { RepositorioDePerfis } from './Repositories/perfilRep';
+import { RepositorioDePostagens } from './Repositories/postsRep';
+import { Pilha } from './Utils/pilha';
 
 // Visual
 const chalk = require('chalk');
 
-class App {
+export class App {
     private _redeSocial: RedeSocial;
 
     // Atributos necessários para gerenciar os IDs dos perfis e postagens.
     private _qntPerfisCriados: number = 0;
     private _qntPostagensCriadas: number = 0;
 
+    /**
+     * Array de Postagens Favoritas
+     */
     private _postagensFavoritas: Array<Postagem> = [];
     
+    /**
+     * Possíveis opções que o App exibirá no Menu Principal.
+     */
     private menuOpcoes: Array<Option> = [
         // Nome da opção, função a ser executada, condição para habilitar a opção
         new Option("Criar Perfil", this.criarPerfil, () => true),
@@ -44,10 +54,15 @@ class App {
         new Option("Exibir Hashtags Populares", this.exibirHashtagsPopulares, () => this._redeSocial.obterPostagens().length > 0)
     ];
 
+    /**
+     * Cursor da opção selecionada no momento.
+     */
     private _opcaoSelecionada : number = 0;
 
     constructor() {
-        this._redeSocial = new RedeSocial;
+        let repPerfis = new RepositorioDePerfis;
+        let repPostagens = new RepositorioDePostagens;
+        this._redeSocial = new RedeSocial(repPerfis, repPostagens);
 
         try {
             // Carregar Arquivos caso hajam.
@@ -909,10 +924,3 @@ class App {
         exibirTextoCentralizado("=== FIM ===");
     }
 }
-
-function main() {
-    const app = new App();
-    app.executar();
-}
-
-main();

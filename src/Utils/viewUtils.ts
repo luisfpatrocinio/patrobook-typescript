@@ -6,6 +6,7 @@ const BG_COLOR2 = '#402751'
 const SEL_COLOR = '#a4dddb'
 
 import { Perfil } from "../Classes/perfil";
+import { enterToContinue, exibirTextoCentralizado } from "./ioUtils";
 
 export function textCol(texto: string, color: string = "#FFFFFF", bgColor: string = "000000") {
     if (bgColor === undefined) {
@@ -145,6 +146,13 @@ export function saltarLinhas(quantidade: number): void {
     for (let i = 0; i < quantidade; i++) {
         console.log();
     }
+}
+
+export function showError(_e: Error) {
+    exibirTextoCentralizado("--- ERRO ---")
+    exibirTextoCentralizado(_e.message);
+    exibirTextoCentralizado("-");
+    enterToContinue();
 }
 
 // @TODO: Rodapé com informações:

@@ -1,1 +1,1 @@
-node ./dist/app.js
+node ./dist/main.js

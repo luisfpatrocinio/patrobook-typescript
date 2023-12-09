@@ -1,12 +1,18 @@
 import { Perfil } from "./perfil";
 import { Postagem, PostagemAvancada } from "./postagem";
-import { RepositorioDePerfis } from "./perfisRep";
-import { RepositorioDePostagens } from "./postagensRep";
-import { exibirTexto } from "../Utils/ioUtils";
+import { RepositorioDePerfis } from "../Repositories/perfilRep";
+import { RepositorioDePostagens } from "../Repositories/postsRep";
+import { IRepPerfis } from "../Interfaces/IRepPerfis";
+import { IRepPostagens } from "../Interfaces/IRepPostagens";
 
 export class RedeSocial {
-    private _repPostagens: RepositorioDePostagens = new RepositorioDePostagens;
-    private _repPerfis: RepositorioDePerfis = new RepositorioDePerfis;
+    private _repPerfis: IRepPerfis;
+    private _repPostagens: IRepPostagens;
+
+    constructor (repPerfis: IRepPerfis, repPostagens: IRepPostagens) {
+        this._repPerfis = repPerfis;
+        this._repPostagens = repPostagens;
+    }
 
     incluirPerfil(perfil: Perfil): void {
         try {
