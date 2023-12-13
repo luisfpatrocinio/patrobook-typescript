@@ -81,13 +81,20 @@ export function mainBackground(): void{
         if (i > 1 && i < obterAlturaTerminal() - 2) console.log(`${h("|")}${h(" ".repeat(obterLarguraTerminal() - 2))}${h("|")}`);
         if (i == obterAlturaTerminal() - 1) console.log(`${h("=".repeat(obterLarguraTerminal()))}`);
     }
+    
+    // Mover cursor para o início da tela:
+    readline.cursorTo(process.stdout, 1, 1);   
+}
 
-    // Rodapé
-    readline.cursorTo(process.stdout, 1, obterAlturaTerminal() - 4);
-    var _data = new Date;
-    var _dataStr = `${_data.toUTCString()}`;
-    exibirTextoNoCentro(`${_dataStr}`);
-
+export function showLastSavedDate(date?: Date): void {
+    if (date != undefined) {
+        readline.cursorTo(process.stdout, 1, obterAlturaTerminal() - 5);
+        exibirTextoNoCentro(`Salvo por último em:`);
+        readline.cursorTo(process.stdout, 1, obterAlturaTerminal() - 4);
+        var _data = date;
+        var _dataStr = `${_data.toUTCString()}`;
+        exibirTextoNoCentro(`${_dataStr}`);
+    }
 
     // Mover cursor para o início da tela:
     readline.cursorTo(process.stdout, 1, 1);   

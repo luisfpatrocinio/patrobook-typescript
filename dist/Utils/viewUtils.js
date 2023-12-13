@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.showError = exports.saltarLinhas = exports.feedView = exports.prepararTelaPostagem = exports.cabecalhoPrincipal = exports.showBlogLogo = exports.exibirTextoCentroCentro = exports.mainBackground = exports.exibirTextoEsquerda = exports.exibirTextoNoCentro = exports.limparTerminal = exports.obterAlturaTerminal = exports.obterLarguraTerminal = exports.obterCorDoFundo = exports.textCol = void 0;
+exports.showError = exports.saltarLinhas = exports.feedView = exports.prepararTelaPostagem = exports.cabecalhoPrincipal = exports.showBlogLogo = exports.exibirTextoCentroCentro = exports.showLastSavedDate = exports.mainBackground = exports.exibirTextoEsquerda = exports.exibirTextoNoCentro = exports.limparTerminal = exports.obterAlturaTerminal = exports.obterLarguraTerminal = exports.obterCorDoFundo = exports.textCol = void 0;
 var readline = require('readline');
 const chalk = require('chalk');
 const BG_COLOR = '#1e1d39';
@@ -84,15 +84,23 @@ function mainBackground() {
         if (i == obterAlturaTerminal() - 1)
             console.log(`${h("=".repeat(obterLarguraTerminal()))}`);
     }
-    // Rodapé
-    readline.cursorTo(process.stdout, 1, obterAlturaTerminal() - 4);
-    var _data = new Date;
-    var _dataStr = `${_data.toUTCString()}`;
-    exibirTextoNoCentro(`${_dataStr}`);
     // Mover cursor para o início da tela:
     readline.cursorTo(process.stdout, 1, 1);
 }
 exports.mainBackground = mainBackground;
+function showLastSavedDate(date) {
+    if (date != undefined) {
+        readline.cursorTo(process.stdout, 1, obterAlturaTerminal() - 5);
+        exibirTextoNoCentro(`Salvo por último em:`);
+        readline.cursorTo(process.stdout, 1, obterAlturaTerminal() - 4);
+        var _data = date;
+        var _dataStr = `${_data.toUTCString()}`;
+        exibirTextoNoCentro(`${_dataStr}`);
+    }
+    // Mover cursor para o início da tela:
+    readline.cursorTo(process.stdout, 1, 1);
+}
+exports.showLastSavedDate = showLastSavedDate;
 function exibirTextoCentroCentro(texto) {
     var _x = Math.floor(obterLarguraTerminal() / 2 - texto.length / 2);
     var _y = Math.floor(obterAlturaTerminal() / 2);

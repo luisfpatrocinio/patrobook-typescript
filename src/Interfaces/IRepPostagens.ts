@@ -22,4 +22,9 @@ export interface IRepPostagens {
      * @throws {PostNotFoundError} - Se nenhuma postagem for encontrada com os filtros especificados.
      */
     consultar(id?: number, texto?: string, hashtag?: string, perfil?: Perfil): Array<Postagem>;
+
+    /**
+     * Salva as postagens no arquivo.
+     */
+    salvar(): void;
 }

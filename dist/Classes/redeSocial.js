@@ -106,11 +106,15 @@ class RedeSocial {
         // Retorna todas as postagens.
         return this._repPostagens.consultar();
     }
-    atribuirPerfisCarregados(novosPerfis) {
-        this._repPerfis.perfis = novosPerfis;
-    }
-    atribuirPostagensCarregadas(novasPostagens) {
+    atualizarPostagens(novasPostagens) {
         this._repPostagens.postagens = novasPostagens;
+    }
+    atualizarPerfis(arrayPerfis) {
+        this._repPerfis.perfis = arrayPerfis;
+    }
+    salvar() {
+        this._repPerfis.salvar();
+        this._repPostagens.salvar();
     }
 }
 exports.RedeSocial = RedeSocial;

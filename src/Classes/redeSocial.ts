@@ -129,11 +129,17 @@ export class RedeSocial {
         return this._repPostagens.consultar();
     }
 
-    atribuirPerfisCarregados(novosPerfis: Array<Perfil>): void {
-        this._repPerfis.perfis = novosPerfis;
-    }
-
-    atribuirPostagensCarregadas(novasPostagens: Array<Postagem | PostagemAvancada>): void {
+    atualizarPostagens(novasPostagens: Array<Postagem | PostagemAvancada>): void {
         this._repPostagens.postagens = novasPostagens;
     }
+
+    atualizarPerfis(arrayPerfis: Array<Perfil>): void {
+        this._repPerfis.perfis = arrayPerfis;
+    }
+
+    salvar(): void {
+        this._repPerfis.salvar();
+        this._repPostagens.salvar();
+    }
+
 }
